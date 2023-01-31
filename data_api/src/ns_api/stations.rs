@@ -1,24 +1,5 @@
 
-
-use reqwest::header::AUTHORIZATION;
 use serde::{Deserialize, Serialize};
-
-
-
-/*
-Station API for querying the NS database.
-This module is set to be private as client does not need to access it and this just handles the
-business logic.
-
-*/
-pub struct StationAPI{
-    return_geometry: bool, 
-    out_sr : usize,
-    return_count_only : bool,
-    result_record_count : usize,
-    result_offset : usize,
-}
-
 
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -56,6 +37,14 @@ pub struct APIResponse{
     features : Vec<Feature>
 }
 
+/*
+Station API for querying the NS database.
+This module is set to be private as client does not need to access it and this just handles the
+business logic.
+
+*/
+pub struct StationAPI{
+}
 
 
 impl StationAPI{
@@ -63,7 +52,6 @@ impl StationAPI{
                         return_count_only : bool, result_record_count: usize, 
                         result_offset : usize) -> Option<APIResponse>{
         
-
         let send_url : String = format!("https://gateway.apiportal.ns.nl/Stationsplattegrond/Stations?returnGeometry={}&outSR={}&returnCountOnly={}&resultRecordCount={}&resultOffset={}", return_geometry, out_sr, return_count_only, result_record_count, result_offset);
         let client = reqwest::Client::new();
         let resp = client
@@ -73,14 +61,9 @@ impl StationAPI{
                 .await.unwrap()
                 .json::<APIResponse>()
                 .await.unwrap();
-
-        println!("{:#?}", resp);
         Some(resp)
-    }
-                        
+    }           
     
-
 }
-
 
 
