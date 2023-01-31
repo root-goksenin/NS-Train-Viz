@@ -1,1 +1,0 @@
-/home/goksenin/NS-Train-Viz/data_api/target/debug/libdata_api.rlib: /home/goksenin/NS-Train-Viz/data_api/src/lib.rs /home/goksenin/NS-Train-Viz/data_api/src/ns_api/mod.rs /home/goksenin/NS-Train-Viz/data_api/src/ns_api/stations.rs
