@@ -1,7 +1,12 @@
 
-use data_api::ns_api::stations::StationAPI;
+#[macro_use] extern crate rocket;
+use data_api::ns_api::end_points::get_stations;
 
-#[tokio::main]
-pub async fn main(){
-        StationAPI::send_request(true, 4326, false , 2, 0).await.unwrap();
+#[rocket::main]
+async fn main() -> Result<(), rocket::Error> {
+    let _rocket = rocket::build()
+        .mount("/stations", routes![get_stations])
+        .launch()
+        .await?;
+    Ok(())
 }
